@@ -1,0 +1,98 @@
+  	<!DOCTYPE html>
+<html lang="es">
+<head>
+	{% load static %}
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static 'css/estilo.css' %}"/> 
+	<link href="{% static 'img/favicon.png' %}" rel="icon" type="image/x-icon" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+	<title>MusicPro - Inicio</title>
+	<!--TODO: Meta tags// Mecanismos de posicionamiento en buscador-->
+</head>
+<body>
+	<div class="container-fluid p-0" style="background-color: crimson;">
+		<div class="container-sm pb-0 pt-0 pe-0 ps-0 pe-lg-3 ps-lg-3 pb-sm-3">
+			{% include 'common/navbar.html' %}
+			<div class="container mt-2 p-0" style="box-shadow: 1px 1px 4px 2px black;">
+				<div id="carrusel" class="carousel slide" data-bs-ride="carousel" pause="true">
+					<div class="carousel-indicators">
+						<button type="button" data-bs-target="#carrusel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1">
+						</button>
+						<button type="button" data-bs-target="#carrusel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+						<button type="button" data-bs-target="#carrusel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+					</div>
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<img src="{% static 'img/slide1.png' %}" class="d-block carruselSlideImg" alt="Imagen 1 Carrusel">
+							<div class="carousel-caption d-none d-md-block">
+								<!--FigCaption del carrusel slide 1-->
+							</div>
+						</div>
+						<div class="carousel-item">
+							<a href="/registrarse"><img src="{% static 'img/slide2.png' %}" class="d-block carruselSlideImg" alt="Imagen 2 Carrusel"></a>
+							<div class="carousel-caption d-none d-md-block">
+								<!--FigCaption del carrusel slide 2-->
+							</div>
+						</div>
+						<div class="carousel-item">
+							<img src="{% static 'img/slide3.png' %}" class="d-block carruselSlideImg" alt="Imagen 3 Carrusel">
+							<div class="carousel-caption d-none d-md-block">
+								<!--FigCaption del carrusel slide 3-->
+							</div>
+						</div>
+					</div>
+					<button class="carousel-control-prev" type="button" data-bs-target="#carrusel" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#carrusel" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+			</div>
+			
+			<div class="container justify-content-center text-light border mt-2 border-top-0" id="seccionTexto">
+				<br>
+				<br>
+				<h1 class="h1 ps-lg-4 d-block text-center text-decoration-underline textoAbout">¡Importante!</h1>
+				<p class="text-center d-block textoAbout" style="font-size: 19px">Solo se reciben pedidos de compra por el portal en línea. <br>Nuestras redes sociales se usarán solo para consultas y promoción de productos.</p>
+				<hr style="padding: 1px;">
+				<br>
+				<h4 class="h4 pt-3 d-block textoAbout text-center">Para ver nuestros productos, ¡visita nuestra galeria!</h4>
+				<p class="ms-lg-5 ps-lg-5 me-lg-5 pe-lg-5 pt-2 pt-lg-2 textoAbout text-center">Contamos con una gran variedad de productos para todo tipo de amantes de la música.</p>
+				<br>
+				<blockquote class="ms-lg-5 ps-lg-5 me-lg-5 pe-lg-5 textoAbout text-center">
+					Visita <span class="text-decoration-underline fw-bold"><a href="/nosotros/" style="color: white;">Sobre Nosotros</a></span> para poder saber más acerca de nuestra visión de negocio y nuestros aportes a <span class="fw-bold">fundaciones</span> para poder apoyar los músicos nacionales. También puedes visitar nuestras redes sociales para conocer las novedades de nuestra tienda y algunas <span class="fw-bold">ofertas únicas</span> para seguidores.
+				</blockquote>
+				<br>
+				{% include 'common/footer.html' %}
+			</div>
+		</div>
+	</div>	
+	<div class="offcanvas offcanvas-start"  tabindex="-1" id="offcanvasCarrito" aria-labelledby="offcanvasCarritoLabel">
+		<div class="offcanvas-header">
+			<h5 class="offcanvas-title" id="offcanvasCarritoLabel">Mi Carrito</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		</div>
+		<div class="offcanvas-body">
+			<div class="container">
+				<div class="row">
+					{% include "carro/widget.html" %}
+				</div>
+		  	</div>
+		</div>
+	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+<script>
+	$(document).ready(function(){
+		$('[data-toggle="popover"]').popover();   
+	});
+</script>
+<script src="{% static 'js/common.js' %}"></script>
+</body>
+</html>

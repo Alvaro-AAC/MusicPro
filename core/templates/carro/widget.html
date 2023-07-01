@@ -1,0 +1,74 @@
+<table class="table table-primary table-striped table-bordered" style="color: black;">
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if request.session.carro.items %}
+            {% for key, value in request.session.carro.items %}
+                <tr class="text-center">
+                    <td>{{value.nombre}}</td>
+                    <td><span id="{{value.producto_id}}-cant">{{value.cantidad}}</span>
+                        <br>
+                    <button  class="btn btn-dark btn-sm cantbtn" onclick="sumar('{% url 'carro:agregar' value.producto_id %}')">+</button>
+                    <button  class="btn btn-dark btn-sm cantbtn" onclick="restar('{% url 'carro:restar' value.producto_id %}')">-</button>
+                </td>
+                    <!--<a href="{% url 'carro:agregar' value.producto_id %}" class="btn btn-dark btn-sm">+</a>
+                        <a href="{% url 'carro:restar' value.producto_id %}" class="btn btn-dark btn-sm">-</a></td>-->
+                    <td>
+                        $<span id="{{value.producto_id}}-subtotal">{{value.precio}}</span>
+                    </td>
+                </tr>
+                <input type="hidden" id="{{value.producto_id}}-stock" value="{{value.stock}}">
+                <input type="hidden" id="{{value.producto_id}}-preciou" value="{{value.precioU}}">
+            {% endfor %}
+        {% else %}
+            <td colspan="3">
+                <div class="alert alert-danger text-center" id="vacio">
+                    Tu carrito est&aacute; vac&iacute;o
+                </div>
+            </td>
+        {% endif %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>
+                Subtotal: $<span id="totalprevio">{{total}}</span>
+            </td>
+            <td>
+                Descuento: $<span id="descuentoresta">{{sustraer}}</span>
+            </td>
+            <td>
+                Total: $<strong><span id="total">{{total_carro}}</span></strong>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                
+            </td>
+            <td>
+                <button class="btn btn-secondary btn-sm" onclick="limpiar_carrito()">Limpiar</button>
+            </td>
+            <td>
+                <a href="/comprar/" class="btn btn-primary btn-sm" id="comprar-btn">Comprar</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="text" class="form-control" placeholder="Ingrese código de descuento..." id="code"></td>
+            <td><button class="btn btn-primary btn-sm" onclick="apply_discount()" id="descountbtn">Descuento</button></td>
+        </tr>
+        <tr>
+            <td colspan="3" id="descount"></td>
+        </tr>
+        {% if request.session.usuario.suscripcion %}
+        <td colspan="3">
+            <div class="alert text-center p-0 m-0">
+                TIENE UN DESCUENTO DEL 5% POR ESTAR SUSCRITO
+            </div>
+        </td>
+        {% endif %}
+    </tfoot>
+</table>

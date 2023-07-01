@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	{% load static %}
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static 'css/estilo.css' %}"/> 
+	<link rel="stylesheet" href="{% static 'css/fadein.css' %}"/> 
+	<link rel="stylesheet" href="{% static 'css/login.css' %}"/>
+	<link href="{% static 'img/favicon.png' %}" rel="icon" type="image/x-icon" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+	<title>MusicPro - Comprar</title>
+	<!--TODO: Meta tags//Mecanismos de posicionamiento en buscador-->
+	<style>
+		#changewidth {
+			width: 50%;
+		}
+		@media (max-width: 990px) {
+			#changewidth {
+				width: 100%;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="container-fluid p-0" >
+        <div class="container-sm pb-0 pt-0 pe-0 ps-0 pe-lg-3 ps-lg-3 pb-sm-3">
+            {% include 'common/navbar.html' %}	
+			<br><br><br><br>
+            <div class="container-fluid mt-1 mt-lg-2 text-light d-flex"> 
+				<div class="container-sm justify-content-center" id="changewidth">
+					<h1 class="underline"><u>Numero de orden: {{boleta.id_boleta}}</u></h1>
+					<div class="bg-light text-dark rounded rounded-lg">
+						{% for producto in productos %}
+						<article class="p-3 pb-1 border border-dark">
+						<h5 class="m-0 p-0 pb-2">{{producto.id_producto.nombre}}</h5>
+						<p class="m-0 p-0">Cantidad: {{producto.cantidad}}</p>
+						<p class="m-0 p-0">Precio: ${{producto.id_producto.precio}}</p>
+						<p class="m-0 p-0">Subtotal: ${{producto.subtotal}}</p>
+						</article>
+						{% endfor %}
+					</div>
+					<h4>Descuento: $-{{request.session.descuento}}</h4>
+					<h3>Total: ${{boleta.total}}</h3>
+				</div>
+            </div>
+        </div>
+		{% include 'common/footer.html' %}
+    </div>
+	<div class="offcanvas offcanvas-start"  tabindex="-1" id="offcanvasCarrito" aria-labelledby="offcanvasCarritoLabel">
+		<div class="offcanvas-header">
+			<h5 class="offcanvas-title" id="offcanvasCarritoLabel">Mi Carrito</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		</div>
+		<div class="offcanvas-body">
+			<div class="container">
+				<div class="row">
+					{% include "carro/widget.html" %}
+				</div>
+		  	</div>
+		</div>
+	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script>
+	$(document).ready(function(){
+		$('[data-toggle="popover"]').popover();   
+	});
+</script>
+<script src="{% static 'js/common.js' %}"></script>
+</body>
+</html>

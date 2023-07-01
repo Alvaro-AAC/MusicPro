@@ -1,0 +1,139 @@
+@charset "utf-8";
+/* CSS Document */
+
+.logoFooter {
+	max-width: 5%;
+	min-width: 28px;
+}
+
+hr {
+	opacity: 50%;
+	background-color: black;
+}
+
+.carruselSlideImg {
+	margin: auto;
+	width: 100%;
+	cursor: pointer;
+}
+
+.textoAbout {
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+}
+
+#brandAnchor {
+	text-decoration: none; 
+	color: inherit;
+}
+
+.logoNavbar {
+	max-width: 200px;
+	min-width: 100px;
+}
+
+.galeriaImg {
+	width: 250px;
+	height: 250px;
+	object-fit: scale-down;
+	object-position: center;
+	overflow: hidden;
+}
+
+.galeriaButton {
+	transition: 0.2s;
+}
+
+.galeriaButton:hover{
+	transform: scale(1.05);
+}
+
+.carrito {
+	width: 60px;
+	cursor: pointer;
+}
+
+.cantinput {
+	width: 50px;
+}
+
+.pwdreveal {
+	cursor: pointer;
+}
+
+#videoAbout {
+	height: 315px;
+	width: 560px;
+}
+
+.nv-end-btn-p {
+	margin-left: 350px;
+}
+
+.nv-end-btn {
+	color: white !important;
+	padding: 5px 10px 5px 10px;
+	text-align: center;
+	text-decoration: none;
+	box-shadow: 1px 2px 5px 0.4px grey;
+}
+
+.perfil-btn {
+	text-decoration: none;
+	color: white;
+}
+
+.perfil-btn:hover {
+	text-decoration: none;
+	color: white;
+}
+
+@media (min-device-width: 341px) and (max-device-width: 767px) {
+	#videoAbout {
+		width: 300px !important;
+		height: 169px !important;
+	}
+}
+
+@media (max-device-width: 340px) {
+	#videoAbout {
+		width: 230px !important;
+		height: 130px !important;
+	}
+}
+
+@media (max-device-width: 1400px) {
+	.nv-end-btn-p {
+		margin-left: 200px !important;
+	}
+}
+
+@media (max-device-width: 1200px) {
+	.nv-end-btn-p {
+		margin-left: 10px !important;
+	}
+}
+
+@media (max-device-width: 991px) {
+	.nv-end-btn {
+		width: 10rem;
+		margin-left: 20px !important;
+		margin-top: 15px !important;
+	}
+}
+
+#seccionTexto {
+	background: linear-gradient(to top, grey 40%, crimson 90% 60%);
+	border-color: black !important;
+	border-width: 1px !important;
+	box-shadow: 1px 1px 5px 2px black;
+}
+
+.dropdown-menu {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.filtro {
+	cursor: pointer;
+	margin: 3px;
+}

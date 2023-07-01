@@ -1,0 +1,9 @@
+Pillow
+Django
+django-rest-framework
+django-rest-swagger
+requests
+cx-oracle
+django-cors-headers
+python-dotenv
+oracledb

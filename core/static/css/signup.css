@@ -1,0 +1,240 @@
+@charset "utf-8";
+/* CSS Document */
+
+legend {
+	float: none; 
+	display: inline;
+	width: auto;
+	padding: 0px 5px;
+	margin: 0px;
+	font-size: 18px;
+}
+#miflexbox {
+	display: flex;
+	justify-content: center !important;
+	align-items: center;
+	vertical-align: middle;
+	margin: auto;
+	width: 93%;
+}
+
+form {
+	margin: auto;
+	border: 1px solid blue;
+	background-color: white;
+	
+}
+
+#volver {
+	position: absolute;
+	float: left;
+	padding: 15px 7px;
+}
+
+input, select {
+	box-shadow: none !important;
+	border-color: grey;
+	border-width: 1.7px !important;
+	background-color: white;
+}
+
+.checkLabel {
+	display: inline;
+}
+
+#loadingModalBody, #loadingModalHead {
+	display: flex;
+	align-items: center;
+	justify-content: center !important;
+	vertical-align: middle;
+}
+
+#terminosSpan {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#terminosReq {
+	color: tomato;
+	font-style: oblique;
+}
+
+svg {
+	display: block;
+}
+
+#pwd {
+	padding: 4px 37px 4px 8px;
+}
+
+#pwdreveal {
+	position: absolute;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	right: 10px;
+}
+
+.inputlabel {
+	position: absolute;
+	cursor: text;
+	display: block;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	background-color: transparent;
+	width: auto;
+	height: 1.4rem;
+	box-sizing: border-box;
+	z-index: 1;
+	left: 10px;
+	bottom: 13px;
+	padding: 0px 3px;
+	opacity: 50%;
+	white-space: nowrap;
+	transition: transform .15s cubic-bezier(.4,0,.2,1),opacity .15s cubic-bezier(.4,0,.2,1),background-color .15s cubic-bezier(.4,0,.2,1);
+}
+
+.cajacontenedora {
+	display: flex;
+	position: relative;
+	align-items: center;
+	text-align: left;
+}
+
+#gato, #codarea {
+	position: absolute;
+	left: 10px;
+}
+
+#codarea {
+	font-size: 14px;
+}
+
+.numeracion {
+	padding-left: 18px;
+}
+
+.tel {
+	padding-left: 33px;
+}
+
+.gotinput + label {
+	transform: translate(-10px, -17px) scale(0.7);
+	opacity: 75;
+	background-color: white;
+}
+
+.mail:not(.gotinput):focus ~ .maillabel {
+	transform: translate(-10px, -17px) scale(0.7);
+	opacity: 75;
+	background-color: white;
+}
+
+.pwd:not(.gotinput):focus ~ .pwdlabel {
+	transform: translate(-10px, -17px) scale(0.7);
+	opacity: 75;
+	background-color: white;
+}
+
+.nombre:not(.gotinput):focus ~ .nombrelabel {
+	transform: translate(-10px, -17px) scale(0.7);
+	opacity: 75;
+	background-color: white;
+}
+
+.apellido:not(.gotinput):focus ~ .apellidolabel {
+	transform: translate(-10px, -17px) scale(0.7);
+	opacity: 75;
+	background-color: white;
+}
+
+.id:not(.gotinput):focus ~ .idlabel {
+	transform: translate(-10px, -17px) scale(0.7);
+	opacity: 75;
+	background-color: white;
+}
+
+.edad:not(.gotinput):focus ~ .edadlabel {
+	transform: translate(-10px, -17px) scale(0.7);
+	opacity: 75;
+	background-color: white;
+}
+
+.tel:not(.gotinput):focus ~ .tellabel {
+	transform: translate(-10px, -17px) scale(0.7);
+	opacity: 75;
+	background-color: white;
+}
+
+.direccion:not(.gotinput):focus ~ .direccionlabel {
+	transform: translate(-10px, -17px) scale(0.7);
+	opacity: 75;
+	background-color: white;
+}
+
+.numeracion:not(.gotinput):focus ~ .numeracionlabel {
+	transform: translate(-10px, -17px) scale(0.7);
+	opacity: 75;
+	background-color: white;
+}
+
+@media (max-device-width: 575px) {
+	.gotinput + label {
+		transform: translate(-10px, -13px) scale(0.7);
+		opacity: 75;
+		background-color: white;
+	}
+
+	.mail:not(.gotinput):focus ~ .maillabel {
+		transform: translate(-10px, -13px) scale(0.7);
+		opacity: 75;
+		background-color: white;
+	}
+	
+	.pwd:not(.gotinput):focus ~ .pwdlabel {
+		transform: translate(-10px, -13px) scale(0.7);
+		opacity: 75;
+		background-color: white;
+	}
+
+	.nombre:not(.gotinput):focus ~ .nombrelabel {
+		transform: translate(-10px, -13px) scale(0.7);
+		opacity: 75;
+		background-color: white;
+	}
+
+	.apellido:not(.gotinput):focus ~ .apellidolabel {
+		transform: translate(-10px, -13px) scale(0.7);
+		opacity: 75;
+		background-color: white;
+	}
+	
+	.id:not(.gotinput):focus ~ .idlabel {
+		transform: translate(-10px, -13px) scale(0.7);
+		opacity: 75;
+		background-color: white;
+	}
+	
+	.edad:not(.gotinput):focus ~ .edadlabel {
+		transform: translate(-10px, -13px) scale(0.7);
+		opacity: 75;
+		background-color: white;
+	}
+	
+	.tel:not(.gotinput):focus ~ .tellabel {
+		transform: translate(-10px, -13px) scale(0.7);
+		opacity: 75;
+		background-color: white;
+	}
+	
+	.direccion:not(.gotinput):focus ~ .direccionlabel {
+		transform: translate(-10px, -13px) scale(0.7);
+		opacity: 75;
+		background-color: white;
+	}
+	
+	.numeracion:not(.gotinput):focus ~ .numeracionlabel {
+		transform: translate(-10px, -13px) scale(0.7);
+		opacity: 75;
+		background-color: white;
+	}
+}

@@ -1,0 +1,62 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top border-1" style="box-shadow: 1px 0px 4px 2px black;">
+    <div class="logoNavbar navbar-brand align-self-center">
+        <a href="/"><img src="{% static 'img/logo.png' %}" class="ms-2 d-inline img-fluid logoNavbar" alt="logo empresa"></a>
+        <!--<a href="#" id="brandAnchor"><h3 class="m-3 d-inline align-self-center">FunnyPet</h3></a>-->
+    </div>
+    <div class="me-3">
+        <button class="btn btn-light nav-link nv-end ms-3 d-inline d-md-inline d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCarrito" aria-controls="offcanvasCarrito">
+            <img src="{% static 'img/carrito.png' %}" alt="Carrito" height="30px">
+        </button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPagina" aria-controls="navbarPagina" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarPagina">
+        <ul class="navbar-nav list-group-horizontal-lg text-end mt-0-lg w-100">
+            <li class="nav-item me-0 mt-0 me-lg-0 mt-lg-0">
+                <a href="/" class="nav-link text-start ps-4">Inicio</a>
+            </li>
+            <li class="nav-item me-0 mt-0 me-lg-0 mt-lg-0">
+                <a href="/nosotros" class="nav-link text-start ps-4">Sobre Nosotros</a>
+            </li>
+            <li class="nav-item dropdown me-0 mt-0 me-lg-0 mt-lg-0">
+                <a href="#" class="nav-link dropdown-toggle text-start ps-4" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><b class="d-block"><a class="dropdown-item" href="/galeria/" style="text-decoration: none;">&#9658; Todos los productos</a></b></li>
+                    {% for macro, mids in navbarprods.items %}
+                    <li><hr class="dropdown-divider"></li>
+                        <li><b class="d-block"><a class="dropdown-item" href="/galeria/?uno={{macro}}" style="text-decoration: none;">&#9658; {{macro}}</a></b></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li>
+                <a href="/seguimiento" class="nav-link text-start ps-4">Seguimiento</a>
+            </li>
+            {% if not is_loged %}
+            <li class="nav-item me-0 mt-0 me-lg-0 mt-lg-0">
+                <a href="/login" class="nav-link btn-primary float-start nv-end-btn-p nv-end-btn rounded" id="ingresar">Ingresar</a>
+            </li>
+            <li class="nav-item me-0 mt-0 me-lg-0 mt-lg-0">
+                <a href="/registrarse" class="nav-link btn-primary float-start nv-end-btn ms-3 rounded" id="registrarse">Registrarse</a>
+            </li>
+            {% else %}
+            <li class="nav-item me-0 mt-0 me-lg-0 mt-lg-0 nv-end-btn-p d-none d-lg-inline">
+                <button class="btn btn-light nav-link nv-end ms-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCarrito" aria-controls="offcanvasCarrito">
+                    <img src="{% static 'img/carrito.png' %}" alt="Carrito" height="30px">
+                </button>
+            </li>
+            <li class="dropdown nav-item me-0 mt-0 me-lg-0 mt-lg-0">
+                <a class="nav-link float-start nv-end ms-3 dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                   <img src="{% static 'img/user.png' %}" alt="user logo" height="30px" width="30px">
+                   <figcaption class="d-inline fw-bold">{{user.nombre}}</figcaption>
+                  </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a href="/perfil/{{ user.rut }}" class="dropdown-item">Mi perfil</a></li>
+                    <li><a href="#" class="dropdown-item" id="deslogearse">Cerrar sesion</a></li>
+                </ul>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

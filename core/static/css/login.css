@@ -1,0 +1,31 @@
+@charset "utf-8";
+/* CSS Document */
+.container-fluid {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to top, crimson 40%, grey 90% 60%);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to top, crimson 40%, crimson 90% 60%);
+}
+
+#divsep{
+    border-radius: 25px;
+    
+}
+
+#divform {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+#loginform {
+    width: 30%;
+    background: linear-gradient(45deg, black, crimson );
+    border-radius: 6%;    
+}

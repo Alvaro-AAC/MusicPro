@@ -53,7 +53,11 @@
                 <button class="btn btn-secondary btn-sm" onclick="limpiar_carrito()">Limpiar</button>
             </td>
             <td>
-                <a href="/comprar/" class="btn btn-primary btn-sm" id="comprar-btn">Comprar</a>
+                <form action="{{ wpurl }}" method="POST">
+                    {% csrf_token %}
+                <input type="hidden" name="token_ws" value="{{ wptoken }}">
+                <input type="submit" value="Pagar" class="btn btn-primary">
+                </form>
             </td>
         </tr>
         <tr>

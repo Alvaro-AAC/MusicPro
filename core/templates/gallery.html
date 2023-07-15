@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 	{% load static %}
+	{% load humanize %}	
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,6 +11,7 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+	<link rel="stylesheet" href="{% static 'css/galeria.css' %}">
 </head>
 <body>
 	<div class="container-fluid p-0" style="background-color:crimson;">
@@ -19,11 +21,12 @@
 			<div class="container-fluid mt-1 mt-lg-2 text-light" style="box-shadow: 1px 0px 4px 2px black; background: linear-gradient(to top,  crimson 40%, grey 90% 60%)">
 				<h1 class="text-center text-light mt-2 pt-2 mt-lg-2 pt-lg-4">Nuestros productos</h1>
 				<hr>
+				<p style="font-size: medium;">{{request.GET.uno}} {% if request.GET.uno %}>{% endif %} {{request.GET.dos}} {% if request.GET.dos %}>{% endif %} {{request.GET.tres}}</p>
 				<div class="container">
-					{% if request.GET.dos %}
-					<div class="w-25 bg-info text-dark rounded p-3">
+					<div class="w-50 w-md-25 bg-light text-dark rounded p-3 ms-4 filtros">
 					<h3>Filtros</h3>
-					<p style="font-size: x-small;">{{request.GET.uno}} > {{request.GET.dos}} > {{request.GET.tres}}</p>
+					{% if request.GET.dos %}
+
 						{% for macro, mids in navbarprods.items %}
 							{% for mid, micros  in mids.items %}
 								{% if request.GET.dos == mid %}
@@ -33,13 +36,10 @@
 								{% endif %}
 							{% endfor %}
 						{% endfor %}
-						<button class="btn-info btn" onclick="eliminarFiltro()">Eliminar filtros</button>
-						<button class="btn-info btn" onclick="eliminarUltimoFiltro()">Volver</button>
-					</div>
+						<button class="btn-primary btn btnfiltro mt-3 ms-2" onclick="eliminarFiltro()">Eliminar filtros</button>
+						<button class="btn-primary btn btnfiltro mt-3 ms-2" onclick="eliminarUltimoFiltro()">Volver</button>
 					{% elif request.GET.uno %}
-					<div class="w-25 bg-info text-dark rounded p-3">
-					<h3>Filtros</h3>
-					<p style="font-size: x-small;">{{request.GET.uno}} > {{request.GET.dos}} > {{request.GET.tres}}</p>
+					
 						{% for macro, mids in navbarprods.items %}
 							{% if request.GET.uno == macro %}
 								{% for mid in mids %}
@@ -47,46 +47,47 @@
 								{% endfor %}
 							{% endif %}
 						{% endfor %}
-						<button class="btn-info btn" onclick="eliminarFiltro()">Eliminar filtros</button>
-						<button class="btn-info btn" onclick="eliminarUltimoFiltro()">Volver</button>
-					</div>
+						<button class="btn-primary btn btnfiltro mt-3 ms-2" onclick="eliminarFiltro()">Eliminar filtros</button>
+						<button class="btn-primary btn btnfiltro mt-3 ms-2" onclick="eliminarUltimoFiltro()">Volver</button>
 					{% else %}
-					<div class="w-25 bg-info text-dark rounded p-3">
-					<h3>Filtros</h3>
-					<p style="font-size: x-small;">{{request.GET.uno}} > {{request.GET.dos}} > {{request.GET.tres}}</p>
+
 						{% for macro, mids in navbarprods.items %}
 							<p onclick="addParamUno('{{macro}}')" class="filtro">- {{macro}}</p>
 						{% endfor %}
-						<button class="btn-info btn" onclick="eliminarFiltro()">Eliminar filtros</button>
-						<button class="btn-info btn" onclick="eliminarUltimoFiltro()">Volver</button>
-					</div>
+						<button class="btn-primary btn btnfiltro mt-3 ms-2" onclick="eliminarFiltro()">Eliminar filtros</button>
+						<button class="btn-primary btn btnfiltro mt-3 ms-2" onclick="eliminarUltimoFiltro()">Volver</button>
 					{% endif %}
+				</div>
+
+					<select class="form-select ms-4 mt-3 w-25" id="selectorCurrency">
+						<option selected="true" disabled="disabled">Seleccione una moneda</option>
+						{% for key, value in currencies.items %}
+						<option value="{{key}}">{{key}}</option>
+						{% endfor %}
+					</select>
+
 					<div class="row">
-						{% load humanize %}	
 						{% for producto in productos %}
-						<div class="col-12 col-md-6 col-lg-4 mb-3">
-							<div class="card border-dark mb-3 h-100" style="margin: 10px 10px; color: black;">
-								<img src="{{producto.imagen.url}}" alt="imagen producto" class="card-img-top galeriaImg" style="width: 100%;">
-								<h5 class="card-header" style="text-align: center;"> {{producto.nombre}}</h5>
-								<div class="card-body" style="text-align: center;">
-									<h5 class="card-title">${{producto.precio|intcomma}}</h5>
-									<p class="card-text">{{producto.desc}}</p>
+						<div class="col-6 col-md-6 col-lg-4 mb-4 mt-4">
+							<div class="imgcontainer me-1 ms-1 me-md-4 ms-md-4" onclick="abrirModal('{{producto.pk}}')">
+								<fig class="figimg">
+									<img src="{{producto.imagen.url}}" alt="imagen producto" class="galeriaImg">
+								</fig>
+								<div class="overlay">
 								</div>
-								{% if not is_loged %}
-								<div class="card-footer text-center">
-									<div class="alert alert-warning" role="alert">Debes registrarte para poder agregar al carro</div>
+								<div class="thumb">
+									<div class="anim">
+										<div class="title">{{producto.nombre}}</div>
+										<div class="desc">{{producto.desc}}</div>
+									</div>
+									<div class="author">
+										{% if currency != "CLP" %}
+										${{producto.precio|floatformat:"2"|intcomma}} {{currency}}
+										{% else %}
+										${{producto.precio|floatformat:"0"|intcomma}} {{currency}}
+										{% endif %}
+									</div>
 								</div>
-								{% elif producto.stock == 0 %}
-								<div class="card-footer text-center">
-									<div class="alert alert-warning" role="alert">Producto sin stock</div>
-								</div>
-								{% else %}
-								<div class="card-footer text-center">
-									<small>Stock disponible: {{producto.stock}}</small>
-									<br>
-									<a href="{% url 'carro:agregar' producto.id_producto %}" class="btn btn-success">Agregar al carro</a>
-								</div>
-								{% endif %}
 							</div>
 						</div>
 						{% empty %}
@@ -99,7 +100,10 @@
 							</p>
 						</div>
 						{% endfor %}
+
+						
 					</div>
+
 				</div>
 				<br><br><br>
 				{% include 'common/footer.html' %}
@@ -119,103 +123,33 @@
 		  	</div>
 		</div>
 	</div>
+
+	{% for producto in productos %}
+	<div class="modal" tabindex="-1" id="{{producto.pk}}">
+		<div class="modal-dialog">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title">{{producto.nombre}}</h5>
+			  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+			  <p>{{producto.desc}}</p>
+			</div>
+			<div class="modal-footer">
+			  <a href="{% url 'carro:agregar' producto.pk %}" type="button" class="btn btn-primary">Añadir al carrito</a>
+			</div>
+		  </div>
+		</div>
+	</div>
+	{% endfor %}
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
   crossorigin="anonymous"></script>
-<script>
-	$(document).ready(function(){
-		$('[data-toggle="popover"]').popover();   
-	});
-	function addParamDos(param) {
-		const urlParams = new URLSearchParams(window.location.search)
-		var url = window.location.pathname;
-		for (const [key, value] of urlParams.entries()) {
-			if(key == 'uno') {
-				var uno = value;
-				var isUno = true;
-			}
-			if(key == 'dos') {
-				var dos = value;
-				var isDos = true;
-			}
-			if(key == 'tres') {
-				var tres = value;
-				var isTres = true;
-			}
-		}
-		if(isUno) {
-			url+='?uno=' + uno;
-			url+='&dos=' + encodeURIComponent(param);
-		}
-		location.replace(url);
-	}
-
-	function addParamUno(param) {
-		var url = window.location.pathname;
-		url+='?uno=' + encodeURIComponent(param);
-		location.replace(url);
-	}
-
-	function addParamTres(param) {
-		const urlParams = new URLSearchParams(window.location.search)
-		var url = window.location.pathname;
-		for (const [key, value] of urlParams.entries()) {
-			if(key == 'uno') {
-				var uno = value;
-				var isUno = true;
-			}
-			if(key == 'dos') {
-				var dos = value;
-				var isDos = true;
-			}
-			if(key == 'tres') {
-				var tres = value;
-				var isTres = true;
-			}
-		}
-		if(isUno) {
-			url+='?uno=' + uno;
-			if(isDos){
-				url+='&dos=' + dos;
-				url+='&tres=' + encodeURIComponent(param);
-			}
-		}
-		location.replace(url);
-	}
-
-	function eliminarFiltro() {
-		location.replace(window.location.pathname);
-	}
-
-	function eliminarUltimoFiltro() {
-		const urlParams = new URLSearchParams(window.location.search)
-		var url = window.location.pathname;
-		for (const [key, value] of urlParams.entries()) {
-			if(key == 'uno') {
-				var uno = value;
-				var isUno = true;
-			}
-			if(key == 'dos') {
-				var dos = value;
-				var isDos = true;
-			}
-			if(key == 'tres') {
-				var tres = value;
-				var isTres = true;
-			}
-		}
-		if(isDos) {
-			url+='?uno=' + uno;
-			if(isTres){
-				url+='&dos=' + dos;
-			}
-		}
-		location.replace(url);
-	}
-</script>
+<script src="{% static 'js/galeria.js' %}"></script>
 <script src="{% static 'js/common.js' %}"></script>
 </body>
 </html>

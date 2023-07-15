@@ -138,7 +138,7 @@ class Boleta(models.Model):
         ]
 
     def __str__(self):
-        return str(self.id_boleta)
+        return str(f'Numero orden: {self.pk} | Estado: {self.estado} | Fecha: {datetime.datetime.strftime(self.fecha_compra, "%d/%m/%Y")} | Total: ${self.total}')
 
 class detalle_boleta(models.Model):
     id_detalle_boleta = models.AutoField(primary_key=True)
@@ -152,7 +152,7 @@ class detalle_boleta(models.Model):
         verbose_name_plural = 'Detalle Boletas'
 
     def __str__(self):
-        return str(self.id_detalle_boleta)
+        return str(f'ID Boleta: {self.id_boleta.pk} | Comprador: {self.id_usuario.nombre} {self.id_usuario.apellido} | Producto: {self.id_producto.nombre}')
 
 class descuento(models.Model):
     codigo = models.CharField(unique=True, max_length=40)

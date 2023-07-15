@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_productos',
     'carrito',
+    'viewflow',
 ]
 
 MIDDLEWARE = [
@@ -87,11 +88,6 @@ WSGI_APPLICATION = 'MusicPro.wsgi.application'
 
 oracledb.version = "8.3.0"
 sys.modules["cx_Oracle"] = oracledb
-dsn = '''(description= (retry_count=2)
-            (retry_delay=3)(address=(protocol=tcps)(port=1521)
-            (host=adb.sa-santiago-1.oraclecloud.com))(connect_data=
-            (service_name=g722d0e58d6fa66_clasesdb_high.adb.oraclecloud.com))
-            (security=(ssl_server_dn_match=yes)))'''
 
 # cx_Oracle.init_oracle_client(lib_dir= str(BASE_DIR) + '/instantclient_21_3')
 

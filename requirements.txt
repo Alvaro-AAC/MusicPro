@@ -7,3 +7,4 @@ cx-oracle
 django-cors-headers
 python-dotenv
 oracledb
+transbank-sdk

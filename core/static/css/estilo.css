@@ -31,22 +31,6 @@ hr {
 	min-width: 100px;
 }
 
-.galeriaImg {
-	width: 250px;
-	height: 250px;
-	object-fit: scale-down;
-	object-position: center;
-	overflow: hidden;
-}
-
-.galeriaButton {
-	transition: 0.2s;
-}
-
-.galeriaButton:hover{
-	transform: scale(1.05);
-}
-
 .carrito {
 	width: 60px;
 	cursor: pointer;

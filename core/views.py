@@ -6,6 +6,9 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
 from carrito.carro import Carro
+import json
+import requests
+from transbank.webpay.webpay_plus.transaction import Transaction
 
 # Create your views here.
 
@@ -43,7 +46,6 @@ def about(request):
             ctx['is_loged'] = True
     ctx['user'] = user
     return render(request, 'about.html', ctx)
-
     
 def gallery(request):
     productos = Producto.objects.all().order_by('pk')
@@ -74,6 +76,35 @@ def gallery(request):
     except:
         productos = []
     ctx['productos'] = productos
+
+    # data = requests.get('http://data.fixer.io/api/latest?access_key=551171b4decc4dc37811626c096d714b')
+    # json_resp = data.json()
+
+    with open('currencies.json') as obj:
+        json_resp = json.load(obj)
+
+    all_currencies = dict(json_resp['rates'])
+
+    clp_val = all_currencies['CLP']
+
+    converted_currencies = {}
+
+    for key, value in all_currencies.items():
+        converted_currencies[key] = value/clp_val
+    ctx['currencies'] = converted_currencies
+    if 'currency' in request.GET:
+        currency = request.GET['currency']
+    else:
+        currency = 'CLP'
+
+    ctx['currency'] = 'CLP'
+    try:
+        ctx['valor'] = converted_currencies[currency]
+        ctx['currency'] = currency
+        for prod in ctx['productos']:
+            prod.precio = prod.precio*converted_currencies[currency]
+    except KeyError:
+        ...
     return render(request, 'gallery.html', ctx) 
 
     
@@ -302,11 +333,15 @@ def producto(request):
     productos = Producto.objects.all()
 
     ctx = {
-        'productos':productos
+        'productos':productos,
     }
     return render(request, ctx)
 
 def generar_boleta(request):
+    resp = (Transaction()).commit(token=request.GET.get('token_ws'))
+    print(resp)
+    if 'TBK_TOKEN' in request.GET:
+        return HttpResponseRedirect('/galeria')
     ctx = {}
     user = None
     try:

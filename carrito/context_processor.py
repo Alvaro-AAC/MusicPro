@@ -1,3 +1,5 @@
+from transbank.webpay.webpay_plus.transaction import Transaction
+
 def total_carro(request):
     total = 0
     if 'usuario' in request.session:
@@ -13,4 +15,13 @@ def total_carro(request):
         sustraer = 0
     else:
         sustraer, sus = (0, 0)
-    return {'total':int(total), "total_carro":int(total - sustraer), 'sustraer': sustraer}
+
+    if int(total-sustraer)>0:
+        buy_order = str(500000)
+        session_id = str(123)
+        amount = int(total-sustraer)
+        return_url = 'http://127.0.0.1:8000/comprar/'
+        response = (Transaction()).create(buy_order, session_id, amount, return_url)
+        return {'total':int(total), "total_carro":int(total - sustraer), 'sustraer': sustraer, 'wpurl':response['url'], 'wptoken':response['token']}
+    else:
+        return {'total':int(total), "total_carro":int(total - sustraer), 'sustraer': sustraer}
